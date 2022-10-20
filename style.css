@@ -1,0 +1,70 @@
+*, *::before, ::after {
+    box-sizing: border-box;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    background-color: pink;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+body.correct {
+    background-color: mediumaquamarine;
+}
+
+body.wrong {
+    background-color: rgb(196, 89, 89);
+}
+
+.container {
+    max-width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.answer-btns {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+}
+
+.btn {
+    background-color: hotpink;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: black;
+    color: hotpink;
+}
+
+.btn.correct {
+    background-color: mediumaquamarine;
+}
+
+.btn.wrong {
+    background-color: rgb(196, 89, 89);
+}
+
+.start, .next {
+    font-size: 150%;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
