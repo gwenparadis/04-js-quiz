@@ -53,7 +53,7 @@ body.wrong {
     background-color: rgb(196, 89, 89);
 }
 
-.start, .next {
+.start {
     font-size: 150%;
     font-weight: bold;
     padding: 10px;
