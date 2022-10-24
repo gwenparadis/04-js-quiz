@@ -10,27 +10,29 @@
 </head>
 
 <body>
-    <div class = "timer hide" id = "timer"></div>
+    <div class="timer hide" id="timer"></div>
     <div class="container">
         <div id="question-container" class="hide">
-            <div id="question">QUESTION</div>
+            <h1 id="question">QUESTION</h1>
             <div id="answer" class="answer-btns">
-                <button id="true" , class="btn answer-btn">True</button>
-                <button id="false" , class="btn answer-btn">False</button>
+                <button onclick="evaluateAnswer('green')" class="btn">responsiveness test: turn the text green</button>
+                <button onclick="evaluateAnswer('red')" class="btn">responsiveness test: turn the text red</button>
             </div>
         </div>
-        <div id = "end-game" class= "hide">GAME OVER!</div>
-            <div id= "high-scores" class= "hide"></div>
-            <ol id= "high-scores" class = "hide"></ol>
+        <div class="high-scores hide"></div>
+        <ol class="high-scores hide"></ol>
         <div class="controls">
             <button id="start" class="start btn">START</button>
         </div>
-        <form action="index.html" id = "initials-form" class = "hide">
-            <label for="initials">Share your initials for the high score board!:</label><br>
-            <input type="text" id="initials" name="initials"><br>
-            <input type="submit" value="Submit" class = "btn">
-          </form>
-
+        <div id="initials-container" class="hide">
+            <h1>GAME OVER! Share your initials for the high score board!:</h1>
+            <input type="text" id="user-input">
+            <button class="btn" onclick="submitForm()">Submit</button>
+        </div>
+        <div id="high-scores" class="hide">
+            <h1>High Scores will show Here!!!</h1>
+            <h2></h2>
+        </div>
         <script src="script.js"></script>
 </body>
 

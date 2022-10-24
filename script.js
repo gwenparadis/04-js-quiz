@@ -3,21 +3,9 @@ let currentQuestion = 0;
 let score = 0;
 
 const questions = [{
-    question: "What do you love about coding?",
+    question: "Question Here?? Explore buttons while timer runs out!",
     answer: true
 },
-{
-    question: "What do you love about bootcamp?",
-    answer: false
-},
-{
-    question: "Third question answer true",
-    answer: true
-},
-{
-    question: "Fourth question answer?",
-    answer: false
-}
 ];
 
 // other global variables
@@ -28,36 +16,36 @@ const trueButton = document.getElementById('true');
 const falseButton = document.getElementById('false');
 const endGameEl = document.getElementById('end-game');
 const highScoresEl = document.getElementById('high-scores');
-const initialsEl = document.getElementById('initials-form');
-
-function startGame() {
-    //hide the start button:
-    start.classList.add('hide');
-    //make the question show:
-    timerEl.classList.remove('hide');
-    questionContainerEl.classList.remove('hide');
-    //start timer function needs to be created and run here!---- idea is keydown event set to answer boolean. if keydown selects true answer, add time, if selects false answer, subtract time
-    countdown();
-    nextQuestion();
-};
+const initialsEl = document.getElementById('initials-container');
 
 // THEN a timer starts:
 function countdown() {
-    let timeLeft = 15;
+    let timeLeft = 5;
 
     const timeInterval = setInterval(function () {
         // As long as the `timeLeft` is greater than 1
         if (timeLeft > 1) {
-            timerEl.textContent = timeLeft + ' seconds remaining';
+            timerEl.textContent = timeLeft + ' seconds left!!';
             timeLeft--;
         } else if (timeLeft === 1) {
-            timerEl.textContent = timeLeft + ' second remaining';
+            timerEl.textContent = timeLeft + ' second left!!';
             timeLeft--;
         } else {
             timerEl.textContent = '';
             endGame();
         }
     }, 1000);
+};
+
+function startGame() {
+    //hide the start button:
+    startButton.classList.add('hide');
+    //make the question show:
+    timerEl.classList.remove('hide');
+    questionContainerEl.classList.remove('hide');
+    //start timer function needs to be created and run here!---- idea is keydown event set to answer boolean. if keydown selects true answer, add time, if selects false answer, subtract time
+    countdown();
+    nextQuestion();
 };
 
 //and I am presented with a question:
@@ -72,10 +60,20 @@ function nextQuestion() {
 
 function endGame() {
     questionContainerEl.classList.add('hide');
-    endGameEl.classList.remove('hide');
-    highScoresEl.classList.remove('hide');
     timerEl.classList.add('hide');
     initialsEl.classList.remove('hide');
+};
+
+function submitForm() {
+    let userInput = document.getElementById('user-input');
+    let highScores = document.getElementById('high-scores');
+
+    highScores.classList.remove('hide');
+    highScores.innerHTML = userInput.value + "'s score is: ";
+};
+
+function evaluateAnswer(color) {
+    questionContainerEl.style.color = color;
 };
 
 //WHEN I click the start button, timer starts and game starts
@@ -95,9 +93,5 @@ function nextQuestion() {
 
     return (score);
 };
-
-function endGame() {
-    show the score sheet
-}
 
 */
