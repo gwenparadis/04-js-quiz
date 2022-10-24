@@ -10,21 +10,28 @@
 </head>
 
 <body>
+    <div class = "timer hide" id = "timer"></div>
     <div class="container">
         <div id="question-container" class="hide">
             <div id="question">QUESTION</div>
             <div id="answer" class="answer-btns">
-                <button id="a", class="btn">Answer 1</button>
-                <button id="b", class="btn">Answer 2</button>
-                <button id="c", class="btn">Answer 3</button>
-                <button id="d", class="btn">Answer 4</button>
+                <button id="true" , class="btn answer-btn">True</button>
+                <button id="false" , class="btn answer-btn">False</button>
             </div>
         </div>
+        <div id = "end-game" class= "hide">GAME OVER!</div>
+            <div id= "high-scores" class= "hide"></div>
+            <ol id= "high-scores" class = "hide"></ol>
         <div class="controls">
             <button id="start" class="start btn">START</button>
         </div>
-    </div>
-    <script src="script.js"></script>
+        <form action="index.html" id = "initials-form" class = "hide">
+            <label for="initials">Share your initials for the high score board!:</label><br>
+            <input type="text" id="initials" name="initials"><br>
+            <input type="submit" value="Submit" class = "btn">
+          </form>
+
+        <script src="script.js"></script>
 </body>
 
 </html>

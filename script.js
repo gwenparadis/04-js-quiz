@@ -1,77 +1,85 @@
-//questions
+//question variables
+let currentQuestion = 0;
+let score = 0;
 
 const questions = [{
-    id: 0,
     question: "What do you love about coding?",
-    answer: ["getting smarter", "getting money", "looking at my success", "all of the above"],
-    correct: 3
+    answer: true
+},
+{
+    question: "What do you love about bootcamp?",
+    answer: false
+},
+{
+    question: "Third question answer true",
+    answer: true
+},
+{
+    question: "Fourth question answer?",
+    answer: false
 }
 ];
 
-// global variables
+// other global variables
 const startButton = document.getElementById('start');
+const timerEl = document.getElementById('timer');
 const questionContainerEl = document.getElementById('question-container');
-const answerButtonsEl = document.getElementById('answer');
-const a = document.getElementById('a');
-const b = document.getElementById('b');
-const c = document.getElementById('c');
-const d = document.getElementById('d');
+const trueButton = document.getElementById('true');
+const falseButton = document.getElementById('false');
+const endGameEl = document.getElementById('end-game');
+const highScoresEl = document.getElementById('high-scores');
+const initialsEl = document.getElementById('initials-form');
 
-let index = 0;
-let score = 0;
-
-function showQuestions() {
-
-    // Getting the question
-    const questionEl = document.getElementById("question");
-    // getting answer variables
-    const a = document.getElementById('a');
-    const b = document.getElementById('b');
-    const c = document.getElementById('c');
-    const d = document.getElementById('d');
-
-
-    // Setting the question text-- THIS WILL NEED TO BE A FOR LOOP TO APPLY TO ALL QUESTIONS
-    questionEl.innerText = questions[0].question;
-
-    // showing the answer choices -- THIS WILL NEED TO BE FOR LOOP AND 0=i SO IT WILL APPLY TO ALL ANSWER CHOICES PER QUESTION IN LOOP
-    a.innerText = questions[0].answer[0];
-    b.innerText = questions[0].answer[1];
-    c.innerText = questions[0].answer[2];
-    d.innerText = questions[0].answer[3];
-
-    // Boolean value of each answer -- THIS WILL NEED TO BE FOR LOOP AND 0=i SO IT WILL APPLY TO ALL ANSWER CHOICES PER QUESTION IN LOOP
-    a.value = questions[0].answer[0].isCorrect;
-    b.value = questions[0].answer[1].isCorrect;
-    c.value = questions[0].answer[2].isCorrect;
-    d.value = questions[0].answer[3].isCorrect;
-
-    // Evaluate method
-    answerButtonsEl[0].addEventListener("click", () => {
-        if (selected == "true") {
-            result[0].innerHTML = "True";
-            result[0].style.color = "green";
-        } else {
-            result[0].innerHTML = "False";
-            result[0].style.color = "red";
-        }
-    })
-};
-
-//THEN a timer starts:
-//and I am presented with a question:
 function startGame() {
     //hide the start button:
     start.classList.add('hide');
     //make the question show:
+    timerEl.classList.remove('hide');
     questionContainerEl.classList.remove('hide');
-    //start timer function needs to be created and run here!
-    showQuestions();
-    console.log("start game func complete!")
+    //start timer function needs to be created and run here!---- idea is keydown event set to answer boolean. if keydown selects true answer, add time, if selects false answer, subtract time
+    countdown();
+    nextQuestion();
+};
+
+// THEN a timer starts:
+function countdown() {
+    let timeLeft = 15;
+
+    const timeInterval = setInterval(function () {
+        // As long as the `timeLeft` is greater than 1
+        if (timeLeft > 1) {
+            timerEl.textContent = timeLeft + ' seconds remaining';
+            timeLeft--;
+        } else if (timeLeft === 1) {
+            timerEl.textContent = timeLeft + ' second remaining';
+            timeLeft--;
+        } else {
+            timerEl.textContent = '';
+            endGame();
+        }
+    }, 1000);
+};
+
+//and I am presented with a question:
+function nextQuestion() {
+    // Getting the question and answer variables
+    const questionEl = document.getElementById("question");
+    // Setting the for loop to display questions
+    for (let i = 0; i < questions.length; i++) {
+        questionEl.innerText = questions[i].question;
+    };
+};
+
+function endGame() {
+    questionContainerEl.classList.add('hide');
+    endGameEl.classList.remove('hide');
+    highScoresEl.classList.remove('hide');
+    timerEl.classList.add('hide');
+    initialsEl.classList.remove('hide');
 };
 
 //WHEN I click the start button, timer starts and game starts
-start.addEventListener("click", startGame)
+startButton.addEventListener("click", startGame);
 
 /*
 function nextQuestion() {    
@@ -87,5 +95,9 @@ function nextQuestion() {
 
     return (score);
 };
+
+function endGame() {
+    show the score sheet
+}
 
 */
