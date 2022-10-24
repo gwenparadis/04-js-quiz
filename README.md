@@ -5,7 +5,7 @@ I have attempted to create an interactive JavaScript quiz utilizing original HTM
 
 ## Installation
 
-This webpage can be accessed on Github Pages, at the link:
+This webpage can be accessed on Github Pages, at the link: https://gwenparadis.github.io/04-js-quiz/
 
 ## Usage
 
