@@ -2,7 +2,7 @@
 let currentQuestion = 0;
 let score = 0;
 let questionCount = 0;
-let timeLeft = 120;
+let timeLeft = 30;
 
 const questions = [{
     question: "Question Here?? answer is peaches",
@@ -15,12 +15,6 @@ const questions = [{
     isCorrect: "bananas"
 }
 ];
-
-/*if (answerChoices.text === isCorrect) {
-    score++;
-    open next question
-}
-*/
 
 // other global variables
 const startButton = document.getElementById('start');
@@ -71,30 +65,37 @@ function showQuestion() {
 
 //presenting answer choices with the coorelating questions, making them clickablle // other question button functions
 function showAnswers() {
-    // getting the answer choices, setting html element, and populating the text
+    // getting the answer choices
     const answerChoices = document.getElementById("answer");
     answerChoices.innerHTML = '';
     const answerList = document.createElement("ul");
     
     for (let i = 0; i < questions[questionCount].answers.length; i++) {
         let answerListOptions = questions[questionCount].answers[i].text;
+
+    //create the html element with desired classes, where the corresponding answer choices will later populate
         const answerListChildren = document.createElement('li');
         answerListChildren.classList.add('btn');
         answerListChildren.classList.add('answer-btns');
+    //make each list option a button
         answerListChildren.setAttribute('type', 'button');
 
+    //when the button is clicked, if the answer is correct, trigger score+1 and add time to counter, if incorrect, take time off the counter
         answerListChildren.addEventListener("click", function(e) {
             console.log("yay clicky click");
 
             if (e.target.textContent === questions[questionCount].isCorrect) {
                 score++;
                 console.log(score);
+                timeLeft = timeLeft + 10;
             } else {
                 timeLeft = timeLeft - 5;
             };
+    //display next question when the interactions are complete
             nextQuestion();
         });
 
+    //appending the corresponding, clickable answer choices for the given question
         answerListChildren.textContent = questions[questionCount].answers[i].text;
         answerList.appendChild(answerListChildren);
         answerChoices.append(answerList);
