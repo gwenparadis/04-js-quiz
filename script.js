@@ -1,12 +1,26 @@
 //question variables
 let currentQuestion = 0;
 let score = 0;
+let questionCount = 0;
+let timeLeft = 120;
 
 const questions = [{
-    question: "Question Here?? Explore buttons while timer runs out!",
-    answer: true
+    question: "Question Here?? answer is peaches",
+    answers: [{text: "apples"}, {text: "oranges"}, {text: "peaches"}, {text: "bananas"}],
+    isCorrect: "peaches"
 },
+{
+    question: "Second choose bananas",
+    answers: [{text: "apples"}, {text: "oranges"}, {text: "peaches"}, {text: "bananas"}],
+    isCorrect: "bananas"
+}
 ];
+
+/*if (answerChoices.text === isCorrect) {
+    score++;
+    open next question
+}
+*/
 
 // other global variables
 const startButton = document.getElementById('start');
@@ -18,10 +32,8 @@ const endGameEl = document.getElementById('end-game');
 const highScoresEl = document.getElementById('high-scores');
 const initialsEl = document.getElementById('initials-container');
 
-// THEN a timer starts:
+//THEN a timer starts:
 function countdown() {
-    let timeLeft = 5;
-
     const timeInterval = setInterval(function () {
         // As long as the `timeLeft` is greater than 1
         if (timeLeft > 1) {
@@ -45,17 +57,61 @@ function startGame() {
     questionContainerEl.classList.remove('hide');
     //start timer function needs to be created and run here!---- idea is keydown event set to answer boolean. if keydown selects true answer, add time, if selects false answer, subtract time
     countdown();
-    nextQuestion();
+    showQuestion();
+    showAnswers();
 };
 
 //and I am presented with a question:
-function nextQuestion() {
+function showQuestion() {
     // Getting the question and answer variables
     const questionEl = document.getElementById("question");
     // Setting the for loop to display questions
-    for (let i = 0; i < questions.length; i++) {
-        questionEl.innerText = questions[i].question;
+    questionEl.textContent = questions[questionCount].question;
+};
+
+//presenting answer choices with the coorelating questions, making them clickablle // other question button functions
+function showAnswers() {
+    // getting the answer choices, setting html element, and populating the text
+    const answerChoices = document.getElementById("answer");
+    answerChoices.innerHTML = '';
+    const answerList = document.createElement("ul");
+    
+    for (let i = 0; i < questions[questionCount].answers.length; i++) {
+        let answerListOptions = questions[questionCount].answers[i].text;
+        const answerListChildren = document.createElement('li');
+        answerListChildren.classList.add('btn');
+        answerListChildren.classList.add('answer-btns');
+        answerListChildren.setAttribute('type', 'button');
+
+        answerListChildren.addEventListener("click", function(e) {
+            console.log("yay clicky click");
+
+            if (e.target.textContent === questions[questionCount].isCorrect) {
+                score++;
+                console.log(score);
+            } else {
+                timeLeft = timeLeft - 5;
+            };
+            nextQuestion();
+        });
+
+        answerListChildren.textContent = questions[questionCount].answers[i].text;
+        answerList.appendChild(answerListChildren);
+        answerChoices.append(answerList);
+
+        console.log(answerListOptions);
     };
+};
+
+//goes to the next question once an answer choice is selected
+function nextQuestion() {
+    questionCount++;
+    if (questionCount == questions.length) {
+        endGame();
+    } else {
+        showQuestion();
+        showAnswers();
+    }
 };
 
 function endGame() {
@@ -69,29 +125,15 @@ function submitForm() {
     let highScores = document.getElementById('high-scores');
 
     highScores.classList.remove('hide');
-    highScores.innerHTML = userInput.value + "'s score is: ";
+    highScores.innerHTML = userInput.value + "'s score is: " + score;
+    saveScore(userInput.value, score);
+    console.log(localStorage.key(userInput.value));
+    console.log(localStorage.getItem(userInput.value));
 };
 
-function evaluateAnswer(color) {
-    questionContainerEl.style.color = color;
+function saveScore(initials, score) {
+    localStorage.setItem(initials, score);
 };
 
 //WHEN I click the start button, timer starts and game starts
 startButton.addEventListener("click", startGame);
-
-/*
-function nextQuestion() {    
-    //WHEN I answer a question incorrectly
-    //THEN time is subtracted from the clock
-    //WHEN all questions are answered or the timer reaches 0
-    //THEN the game is over
-    //WHEN the game is over
-    
-    //THEN I can save my initials and my score
-    localStorage.setItem(highScore);
-    highScore.textContent = highScore;
-
-    return (score);
-};
-
-*/
